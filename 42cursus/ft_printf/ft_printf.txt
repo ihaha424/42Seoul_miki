@@ -1,0 +1,43 @@
+#include <starg.h>
+: 가변인자헤더
+va_list: 가변인수
+va_start: 가변인수를 읽기 위한 준비 ap포인터가 첫번째 가변인수를 가리키도록 초기화하는 것
+va_end: 가변인수를 다 읽고 뒷정리
+va_arg: arg_prt로 지정된 위치에서 지정된 var_type값을 검색하고 리스트에서 다음 인수를 가리키도록 ptr를 늘림
+(va_arg는 매크로 함수로 va_arg의 두번째 인수는 내부적으로 sizeof 연산자와 캐스트연산자로 전달됨)
+
+c:단일 문자
+s:문자열
+p:void* 형식의 포인터 인자(16진수로 출력) (SIZE_MAX의 범위)
+d:10진수 숫자
+i:10진수 정수(d랑 무슨 차이인지 잘 모르겠음)
+u:unsigned 10진수 숫자
+x:소문자를 사용하여 16진수 숫자 (unsigned int의 범위)
+X:대문자를 사용하여 16진수 숫자 (unsigned int의 범위)
+%:퍼센트 기호
++)
+va_list 자료형이 내부적으로 가르키는 값은 4byte씩 나뉘어져 있어서 char, int 자료형을 동일하게 사용
+
+///////////
+man 3 printf
+
+c       The int argument is converted to an unsigned char, and the resulting character is written.
+s       The char * argument is expected to be a pointer to an array of character type (pointer to astring).
+p       The void * pointevr argument is printed in hexadecimal (as if by `%#x' or `%#lx').
+%       A `%' is written.  No argument is converted.  The complete conversion specification is `%%'.
+diuxX  
+d,i: The int (or appropriate variant) argument is converted to signed decimal (d and i)
+u: unsigned decimal (u)
+x,X: unsigned hexadecimal (x and X) notation.
+
+size_t
+///////////////////
+Note: 	the t modifier, when applied to a o, u, x, or X conversion, indicates that the argument is of
+        an unsigned type equivalent in size to a ptrdiff_t.  The z modifier, when applied to a d or i conver-
+        sion, indicates that the argument is of a signed type equivalent in size to a size_t.  Similarly,
+        when applied to an n conversion, it indicates that the argument is a pointer to a signed type equiva-
+        lent in size to a size_t.
+t 수정자는 o, u, x 또는 X 변환에 적용될 때 인수가 크기가 ptrdiff_t와 동일한 부호 없는 유형임을 나타냅니다. z 수정자는 d 또는 i 변환에 적용될 때 인수가 size_t와 크기가 동일한 부호 있는 유형임을 나타냅니다. 마찬가지로 n 변환에 적용될 때 인수가 size_t와 크기가 동일한 부호 있는 형식에 대한 포인터임을 나타냅니다.
+
+==============
+make -C 폴더에서 메이크(make의 재귀호출)

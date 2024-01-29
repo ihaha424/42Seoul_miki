@@ -1,0 +1,5 @@
+Credentials cache: API:1CE169DB-5BDA-4013-B168-DC6946CA7B17
+        Principal: dongmiki@42SEOUL.KR
+
+  Issued                Expires               Principal
+Aug 22 16:43:46 2022  Aug 23 02:43:46 2022  krbtgt/42SEOUL.KR@42SEOUL.KR

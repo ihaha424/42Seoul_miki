@@ -1,0 +1,60 @@
+내보내다
+export aaa="aaa"
+export aaa="bbb"
+
+설정되지 않음
+unset USER
+export USER=dongmiki
+env
+
+cd
+cd ../..
+
+비밀
+pwd
+
+상대경로
+cd .. 무한반복
+../minishell/minishell
+
+환경경로
+unset PATH
+minishell$> env | grep PATH
+export PATH="/Users/dongmiki/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Library/Apple/usr/bin:/Users/dongmiki/.brew/bin"
+
+리디렉션
+<<in >out <minishell.c <<in2  >out2 cat
+<<in >out <minishell.c <<in2  >out2 >>out3 cat
+
+파이프
+cat minishell.c | grep "include"
+cat minishell.c | grep "include" > output
+cat minishell.c | grep "include" >> output
+cat <minishell.c | grep "include"
+
+미쳐가라 그리고 역사
+cat | cat | ls
+
+환경변수
+echo $USER
+echo "$USER"
+echo '$USER'
+
+보너스
+export USER=aaa
+echo "'$USER'"
+echo '"$USER"'
+
+
+--------------------------------
+1. ><>< 리더렉션 처리
+2. here_doc여러개 어떤식으로 돌아가는지
+3. 리더렉션에서 파일들 오픈 다 되는지
+4. exit 코드
+5. export 에서 변수 안들어가는거
+6. "잘 처리 되는지" +'"
+7. $?
+8. cat
+9. | 가 있는 것에서는 안바뀜 export같은것들이
+10. $?Hello
++)테스터기

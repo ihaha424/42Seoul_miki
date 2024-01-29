@@ -1,0 +1,11 @@
+ex01
+	상속 받는 Class의 경우 부모의 private를 제외한(ex00 -> ex01의 ClapTrap.hpp변경점: private -> protected)
+	모든 함수를 사용 받을 수 있다.
+	하지만 재정의 하는 함수의 경우 다른 오버로딩이여도 사용 불가하다.
+		ex> attck의 경우 ClapTrap에서는 3가지 타입으로 정의해서 3가지 경우다 사용 가능하지만,
+		ScavTrap에서는 새로 재정의를 1가지만 해주었기 떄문에 1가지 경우로 밖에 사용이 불가능하다.
+ex03
+	다형성
+		virtual
+
+	트라이얼??

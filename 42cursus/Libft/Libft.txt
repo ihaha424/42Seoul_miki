@@ -1,0 +1,55 @@
+https://blog.naver.com/oddish0513/222828424894
+	• isalpha :알파벳인지아닌지
+	• isdigit :숫자인지아닌지
+	• isalnum :알파벳과 숫자인지 아닌지
+	• isascii :아스키인지 아닌지
+	• isprint :출력가능한 아스키인지아닌지
+C-pisine/C01/ex06
+	• strlen
+https://blog.naver.com/min_gi1123/222670109191
+	• memset :b의 버퍼를 len만큼 c로 채워주는 것
+	• bzero :s의 버퍼를 n만큼 0으로 채워주는 것
+	• memcpy :src를 dst에 복사해주는 것(n만큼)
+	• memmove :src를 dst에 복사해주는 것(n만큼) 겹치는 부분도 가능하게 복사해야함
+C-pisine/C02/ex10
+	• strlcpy
+C-pisine/C03/ex5
+	• strlcat
+
+	• toupper :대문자로
+	• tolower :소문자로
+https://blog.naver.com/oddish0513/222837744494
+	• strchr :문자열 s 에서 문자 c 가 "처음" 발견된 곳의 주소를 리턴해주는 함수
+	• strrchr :문자열 s 에서 문자 c 가 "마지막으로" 발견된 곳의 주소를 리턴해주는 함수
+C-pisine/C03/ex1
+	• strncmp
+https://blog.naver.com/oddish0513/222837819764
+	• memchr: 문자열 s에서 문자 c가 있는지 n byte만큼 검사하며 "처음" c 가 발견된 곳의 주소를 리턴하는 함수
+https://blog.naver.com/oddish0513/222837826882
+	• memcmp: 문자열 s1과 s2를 n 바이트만큼 비교하는 함수
+C-pisine/C03/ex04++
+	• strnstr:strstr에서 n갯수 만큼
+C-pisine/C04/ex03
+	• atoi
+https://ko.gadget-info.com/difference-between-malloc
+	• calloc: malloc이랑 비슷한데 size를 count의 갯수 만큼 동적 할당한 후 0으로 초기화
+C-pisine/C07/ex00
+	• strdup
+
+	• substr: 문자열을 start에서 t만큼 복사해서 만들기
+	• strjoin: 문자열 2개 이어붙이기
+	• strtrim: 문자열의 앞뒤에 지정한 문자들(set)을 제거하는 함수
+C-pisine/C07/ex05
+	• split	
+
+	•itoa: 정수를 문자로
+	•strmapi: 문자열의 각 문자를 순회하여 f함수를 적용시켜서 만들어서 리턴
+	•striteri: mapi랑 새로만들지않고 그값에 넣음
+	•ft_putchar_fd: 파일디스크립션에 출력
+	•ft_putstr_fd: "(문자열)
+	•ft_putendl_fd: "(+개행)
+	•ft_putnbr_fd: "(숫자출력)
+한글 번역본...
+	https://github.com/42seoul-translation/subject_ko/blob/master/libft/libft.ko.md
+restrict은 우리가 만드는 버전에서 사용하지 않음
+

@@ -1,0 +1,127 @@
+1. pipe()
+	#include <unistd.h>
+	int  pipe(int fd[2]);
+	:인자로 fd(파일디스크립터)변수를 넣어주어야합니다. 변수명은 마음대로지만 int형의 크기가 2인 배열을 넣어주어야합니다. pipe()함수는 이 fd[0]을 입력fd로 fd[1]을 출력fd로 만들어 줍니다.
+
+2. fork()
+	#include <unistd.h>
+	pid_t  fork(void);
+	:fork()함수는 프로세스를 복사해주는 함수입니다. 이렇게 복사된 프로세스를 "자식 프로세스" 기존의 프로세스를 "부모 프로세스"라고 부릅니다.
+	:반환값으로 자식프로세스의 pid값을 반환합니다. 여기서 pid란 Process IDentifier의 약자로, 프로세스의 고유 ID입니다. 자료형타입으로 pid_t를 사용하는데 int형으로 선언해도 잘 동작합니다. (자세한 이유는 모르겠지만 pid_t는 0 ~ 32767의 범위를 갖는다고 합니다. -1 == 32768경우도 포함)
+	:fork()함수가 실패할 경우 -1을 반환합니다.
+	:자식프로세스는 fork()함수가 호출된 이후부터 진행합니다. 그렇기 때문에 자식프로세스에서는 fork()반환값을 저장한 변수의 값이 0입니다. 
+
+3. waitpid()
+	#include <sys/wait.h>
+	pid_t  waitpid(pid_t pid, int *statloc, int options);
+	:waitpid()함수의 동작은 wait()함수의 매커니즘과 비슷합니다.
+	:waitpid()함수는 wait()함수보다 더 다양한 일을 합니다. 특징적으로 무한대기 상태가 될 수 있는 wait()함수를 보완한 함수입니다.
+	:????
+
+4. dup()
+	#include <unistd.h>
+	int  dup(int fd);
+	:인자로 fd(파일디스크립터)를 받고 복사하여 반환합니다.
+	:오류시 -1을 반환합니다.
+	:새로 복사해서 주는데 같은 곳을 가르킴
+
+5. dup2()
+	#include <unistd.h>
+	int  dup2(int fd, int fd2);
+	:두번째 인자가 첫번째 인자의 복제가 됩니다.
+	:반환값은 두번째 인자값과 같습니다.
+	:dup()함수와 차이점은 직접 fd값지정한 곳에 복사할 수 있다는 것 입니다.
+	:만약 두번째 인자의 fd값이 열려있다면 닫은 후 복제됩니다.
+
+6. perror()
+	#include <stdio.h>
+	void  perror(const char* str);
+	: error()함수는 fd(파일디스크립터)가 2로 에러출력을 담당합니다.
+	: 위와 같이 지정해준 에러메시지와 errno의 값을 해석하여 출력해줍니다. (OS나 컴파일러에 따라 해석이 달라집니다.)
+
+7. strerror()
+	#include <string.h>
+	char*  strerror(int errnum);
+	:perror()함수는 errono값을 해석하여 인자값과 함께 출력해줍니다.
+	:strerror()함수는 errono값만을 해석하여 출력해줍니다.
+
+8. access()
+	#include <unistd.h>
+	int  access(const char *pathname, int mode);
+	:파일에 대해 확인하는 함수입니다.
+	:첫번째인자로 파일 주소를 두번째인자로 체크할 내용(mode)를 받습니다.
+	:파일주소가 심볼릭 링크라면 원본을 체크합니다.
+	:mode가 가능하면 0을 실패시 -1을 반환합니다.
+
+9. unlink()
+	#include <unistd.h>
+	int  unlink(const char *pathname);
+	:링크를 삭제하는 함수로 인자로 파일주소를 받습니다.
+	:성공 시 0을 실패시 -1을 반환합니다.
+
+10. execve()
+	#include <unistd.h>
+	int  execve(const char *filename,  char *const argv[],  char *const envp[]);
+	@@@:다른 프로그램을 실행하고 자신은 종료합니다.
+	:execve()함수는 exec계열함수입니다. exec계열함수의 종류는 여러가지가 있습니다.
+	:첫번째 인자로 받은 path의 파일을 실행하고 argv, envp를 인자로 전달합니다.
+	:exec뒤에 오는 v와 e의 의미는 다음과 같습니다. _ v: argv가 파라미터를 char _[]로 한번에 받는다는 뜻입니다. 배열의 마지막값은 NULL이어야 합니다. * e: 설정할 환경변수를 파라미터로 받는데 char \*[]배열로 한번에 받습니다.
+	:위의 예시에서 봤듯이 execve()함수를 이용하여 커맨드 명령어를 실행하기 위해서는 첫번째 인자인 파일경로에 해당 커맨드명령어파일의 경로를 넣어주어야 합니다.
+	:ls, mv와 같은 명령어들은 "/bin"경로에 위치했습니다.bin_file_list
+	:하지만 wc와 같은 명령어는 "/bin"경로가 아닌 "usr/bin"경로에 위치하였습니다.usr/bin_file_list
+
+--------------------------------------------
+int		main(int ac, char *av[], char **envp);
+	envp: main에서 환경변수를 매개변수로 받는 것.
+open()
+	O_RDWR: 읽기쓰기
+	O_CREAT: 해당파일이 없으면 생성(접근권한을 지정하기 위해 접근 권한 값 0644를 추가해야함)
+	O_TRUNC: 기존의 파일 내용을 모두 삭제
+사용하십시오 EXIT_FAILURE. OS 전체에서 사용되는 상수입니다. 그 값은 1이 아닌 다른 값일 수 있으며 코드에서 더 설명적입니다.
+
+command의 위치는 which라는 명령어를 통해 확인이 가능하다.
+환경변수 PATH에 cmd 명령어들의 실행파일이 위치해 있다고 함.
+
+
+here_doc모드에서는 uppend?모드로 덮처쓰기가 아닌 추가해서 쓰는 것.
+
+어떤 프로그램(command)를 실행시킬 때 bash는 다음과 같은 방식으로 command 실행 파일의 경로를 찾는다.
+
+기본적으로 해당 프로그램명(command)이 '/'를 포함하고 있으면 경로가 명시되어 있는 것으로 판단한다.
+이 경우 경로가 이미 있으므로 별도의 경로 탐색없이 해당 프로그램명으로 바로 프로그램을 실행시키는 동작을 한다.
+'/'가 없으면 경로가 명시되지 않았다고 판단하여 환경변수 $PATH 에서 실행가능한 경로를 찾는다.
+PATH에 있는 모든 경로에서 실행 가능 여부를 앞에서부터 하나씩 check
+가장 먼저 실행가능하다고 판단된 경로로 프로그램을 실행시키게 된다.
+어떤 경로에서도 실행이 불가능하면 Error로 판단
+
+pipe()에서 fd를 사용 하지 않아도 파이프로 프로세스를 연결하는 것 자체에 의미가 있느 것같음.
+
+void	final_process(t_arg *arg, char **envp, int i, char **av)
+{
+	pid_t	pid;
+	int		fd[2];
+
+	if (pipe(fd) == -1)
+		error(1, NULL);
+	pid = fork();
+	if (pid == -1)
+		error(1, NULL);
+	if (pid == 0)
+	{
+		dup2(arg->outfile, STDOUT_FILENO);
+		close(arg->outfile);
+		close(fd[1]);
+		close(fd[0]);
+		cmd_start(arg, envp, i, av);
+	}
+	dup2(fd[0], STDIN_FILENO);
+	close(fd[1]);
+	close(fd[0]);
+	close(arg->outfile);
+	wait_all();
+}
+에서 fd를 사용하지 않고 자식은 outfile에만 출력을하는데
+dup2(fd[0], STDIN_FILENO);의 부분이 없으면 파이프로 연결이 안되어서
+프로세스가 무한으로 대기하는 현상이 발생할 수 있어보임
+출력자체는 가능하나 앞의 프로세스가 /dev/random같은 파일을 cat으로 읽는 경우 뒤의 프로세스에서 필요한 부분은 읽어서 출력이 되었으나
+연결이 안되어 있어서 앞의 프로세스(차일드-cat부분)이 무한으로 실행되고 있는 문제가 생김.
